@@ -2,7 +2,7 @@ PythonFastAPINext.jsTensorFlowResNet50SQLite
 🧬 SkinAI: Full-Stack Skin Cancer Detection System
 SkinAI is a professional, production-grade medical AI application designed for skin lesion classification. Built with a custom-trained ResNet50 Convolutional Neural Network (CNN), it features a strict separation of concerns between a Next.js frontend and a FastAPI backend, ensuring scalable and maintainable architecture.
 
-(Note: Add a screenshot/GIF of your web app here later!)
+
 
 🌟 Key Features
 🧠 Real-Time Deep Learning: Uses a custom-trained ResNet50 model (Transfer Learning) to classify skin lesions into 7 distinct categories.
@@ -32,7 +32,7 @@ Git
 1. Clone the Repository
 bash
 
-git clone https://github.com/YOUR-USERNAME/skin-cancer-detection.git
+git clone https://github.com/syedasumayya/skin-cancer-detection.git
 cd skin-cancer-detection
 2. Backend Setup
 (Note: Requires Python 3.11 due to TensorFlow constraints. If you have Python 3.12+, use py -3.11 to create the venv).

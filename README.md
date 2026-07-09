@@ -1,116 +1,129 @@
-PythonFastAPINext.jsTensorFlowResNet50SQLite
-🧬 SkinAI: Full-Stack Skin Cancer Detection System
-SkinAI is a professional, production-grade medical AI application designed for skin lesion classification. Built with a custom-trained ResNet50 Convolutional Neural Network (CNN), it features a strict separation of concerns between a Next.js frontend and a FastAPI backend, ensuring scalable and maintainable architecture.
+🧬 SkinAI - Skin Cancer Detection AI System
+A professional, production-grade medical AI application for skin lesion classification using a custom-trained ResNet50 CNN architecture with Next.js frontend and FastAPI backend.
 
+🏥 Features
+Professional Image Validation: Rejects non-medical images (empty pages, documents, random objects) using advanced OpenCV analysis before reaching the AI.
+Advanced Cancer Detection: ResNet50 + CNN with realistic medical analysis classifying lesions into 7 distinct categories (Melanoma, Nevus, BCC, etc.).
+Secure JWT Authentication: Custom-built token-based authentication system with bcrypt password hashing (No third-party auth dependencies).
+Persistent Database Storage: User accounts and scan history are permanently saved using SQLAlchemy ORM and SQLite.
+Real-time Analysis: Fast skin lesion prediction with multi-class confidence scoring and color-coded risk assessment.
+Medical Recommendations: Professional post-analysis advice based on the specific predicted condition.
+📋 Prerequisites
+Before running this project, ensure you have:
 
-
-🌟 Key Features
-🧠 Real-Time Deep Learning: Uses a custom-trained ResNet50 model (Transfer Learning) to classify skin lesions into 7 distinct categories.
-🛡️ Smart Image Validation: OpenCV-powered preprocessing rejects non-medical images (documents, random objects) before they reach the AI.
-🔐 Secure Authentication: JWT-based auth system with bcrypt password hashing and protected API routes.
-🗄️ Persistent Database: SQLAlchemy ORM with SQLite for permanent storage of user data and scan history.
-🎨 Modern UI/UX: Built with Next.js 14 (App Router), TypeScript, and Tailwind CSS for a flawless, responsive interface.
-📊 Detailed Analytics: Displays multi-class confidence percentages, color-coded risk levels, and professional medical recommendations.
-🏗️ Architecture & Tech Stack
-This project utilizes a monorepo structure, strictly separating frontend and backend logic.
-
-Layer	Technology	Purpose
-Frontend	Next.js 14, TypeScript, Tailwind CSS	User Interface, State Management, API Calls
-Backend	Python, FastAPI, Pydantic	REST API, JWT Auth, Request Handling
-Database	SQLite, SQLAlchemy ORM	Persistent User & Analysis Storage
-AI / ML	TensorFlow, Keras, ResNet50	Image Preprocessing, Feature Extraction, Prediction
-Vision	OpenCV, NumPy, Pillow	Image Validation, Color Space Analysis
-Data Flow: User Upload ➜ Next.js (Axios) ➜ FastAPI ➜ OpenCV Validation ➜ ResNet50 Inference ➜ SQLite Database ➜ UI Response
-
-📂 Project Structure
-skin-cancer-detection/├── backend/                  # Python FastAPI Server│   ├── main.py              # Application entry point & API routes│   ├── auth.py              # JWT & Bcrypt authentication logic│   ├── model.py             # ResNet50 AI model wrapper & simulation mode│   ├── preprocessing.py     # OpenCV image validation & formatting│   ├── schemas.py           # Pydantic data models (Type safety)│   ├── database.py          # SQLAlchemy engine & session config│   ├── models.py            # Database table blueprints (Users, Analysis)│   ├── model_weights/        # Directory for the trained .h5 model file│   ├── uploads/             # Directory for user-uploaded images│   ├── requirements.txt     # Python dependencies│   └── skin_cancer.db       # SQLite database file (auto-generated)│├── frontend/                 # Next.js 14 Application│   ├── src/│   │   ├── app/             # App Router (pages)│   │   ├── components/      # Reusable UI components│   │   ├── context/         # React Context (Auth state)│   │   ├── lib/             # Axios API client configuration│   │   ├── types/           # TypeScript interfaces│   │   └── utils/           # Helper functions│   ├── package.json         # Node.js dependencies│   └── tailwind.config.js   # Tailwind CSS configuration│├── .gitignore               # Files ignored by Git└── README.md                # You are here!
-🚀 Local Setup & Installation
-Prerequisites
-Python 3.11+ (Required for TensorFlow compatibility)
-Node.js 18+
-Git
-1. Clone the Repository
-bash
-
-git clone https://github.com/syedasumayya/skin-cancer-detection.git
-cd skin-cancer-detection
-2. Backend Setup
-(Note: Requires Python 3.11 due to TensorFlow constraints. If you have Python 3.12+, use py -3.11 to create the venv).
+Python 3.11 installed (Note: Python 3.12/3.13/3.14 will NOT work with TensorFlow. You must use 3.11)
+Node.js 18+ installed
+Git installed
+VS Code with Python and JavaScript/TypeScript extensions
+🚀 Step-by-Step Setup Guide
+Step 1: Clone and Open Project
+git clone https://github.com/syedasumayya/skin-cancer-detection.gitcd skin-cancer-detectioncode .
+Step 2: Python Backend Setup
+Open a terminal in VS Code and run:
 
 bash
 
 cd backend
 python -m venv venv
 
-# Activate virtual environment
-# Windows:
+# Activate virtual environment (Windows)
 venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-Note: To use the real AI model, place your trained skin_cancer_model.h5 file inside the backend/model_weights/ folder and ensure use_simulation=False in main.py. If no model is provided, the system safely falls back to an intelligent simulation mode.
+Step 3: AI Model & Database Setup
+The application uses a real ResNet50 model.
 
-3. Frontend Setup
-Open a new terminal:
+Create a folder named model_weights inside the backend folder.
+Place your trained skin_cancer_model.h5 file inside model_weights/.
+(Note: If you do not have a model file, the system will automatically and safely fall back to a "Simulation Mode" that generates realistic UI responses for testing).
+The SQLite database (skin_cancer.db) will be created automatically the first time you start the server.
+
+Step 4: Frontend Setup
+Open a second terminal in VS Code and run:
 
 bash
 
 cd frontend
 npm install
-4. Run the Application
-Terminal 1 (Backend):
+🔧 Running the Project
+You must have two terminals open at the same time.
+
+Terminal 1 - Backend (Port 8000):
 
 bash
 
 cd backend
 venv\Scripts\activate
 python main.py
-# Server runs on http://localhost:8000
-Terminal 2 (Frontend):
+You should see: ✅ AI Model loaded successfully and ✅ Database tables checked/created
+
+Terminal 2 - Frontend (Port 3000):
 
 bash
 
 cd frontend
 npm run dev
-# Client runs on http://localhost:3000
-Access the application at: http://localhost:3000
+Access Application:
 
-🧠 AI Model Training
-The ResNet50 model was trained using Transfer Learning on the HAM10000 (Human Against Machine with 10000 Training Images) dataset.
+Frontend App: http://localhost:3000
+Backend API Docs: http://localhost:8000/docs
+📁 Project Structure
+text
 
-Pipeline:
+skin-cancer-detection/
+├── backend/                  # Python FastAPI Server
+│   ├── main.py              # API routes & lifespan
+│   ├── auth.py              # JWT & Bcrypt logic
+│   ├── model.py             # ResNet50 AI model wrapper
+│   ├── preprocessing.py     # OpenCV image validation
+│   ├── schemas.py           # Pydantic data models
+│   ├── database.py          # SQLAlchemy setup
+│   ├── models.py            # Database table schemas
+│   ├── model_weights/        # PUT YOUR .h5 MODEL HERE
+│   ├── requirements.txt     # Python dependencies
+│   └── skin_cancer.db       # Auto-generated SQLite DB
+│
+├── frontend/                 # Next.js 14 Application
+│   ├── src/
+│   │   ├── app/             # Pages (login, register, dashboard, history)
+│   │   ├── components/      # Reusable UI components
+│   │   ├── context/         # React Auth Context
+│   │   ├── lib/             # Axios API client
+│   │   └── types/           # TypeScript interfaces
+│   ├── package.json         # Node dependencies
+│   └── tailwind.config.js   # Tailwind setup
+│
+├── .gitignore               # Git ignore rules
+└── README.md                # You are here!
+🧪 Testing the System
+Register/Login:
+Go to http://localhost:3000. Create an account or sign in. Your data is permanently saved to the database.
+Test Image Validation:
+Upload a non-medical image (a Word document, a screenshot of code). The AI will reject it: "This doesn't appear to contain skin."
+Test Cancer Detection:
+Upload a close-up image of a skin lesion/mole. The system will analyze it, show the primary prediction, confidence percentages for all 7 classes, and provide medical recommendations.
+Test Database Permanence:
+Close the backend terminal, restart it (python main.py), log back in, and check the "History" tab. Your previous scans will still be there.
+🔍 Troubleshooting
+ModuleNotFoundError: No module named 'tensorflow'
+You are likely using Python 3.12 or newer. TensorFlow requires Python 3.11. Install Python 3.11, delete the venv folder, and recreate it using py -3.11 -m venv venv.
+passlib/bcrypt ValueError
+Run pip install bcrypt==4.0.1 to fix the version clash between passlib and bcrypt.
+Frontend won't connect to Backend (CORS error)
+Ensure the backend is actually running on port 8000 before starting the frontend.
+Port 3000 or 8000 is already in use
+Close any other applications using those ports, or change the ports in main.py and vite.config.js.
+🏥 Medical Disclaimer
+This AI system is for educational and portfolio demonstration purposes only. All results are generated by a machine learning model and must be interpreted by qualified healthcare professionals. Never use this system for final medical diagnosis or as a substitute for professional medical consultation.
 
-Base Model: Pre-trained ResNet50 on ImageNet (frozen weights).
-Classification Head: Custom GlobalAveragePooling2D → Dense(512) → Dropout(0.5) → Softmax(7).
-Training Environment: Google Colab (NVIDIA T4 GPU).
-Classes: Melanoma, Melanocytic Nevus, Basal Cell Carcinoma, Actinic Keratosis, Benign Keratosis, Dermatofibroma, Vascular Lesion.
-🛠️ API Endpoints
-Method
-Endpoint
-Description
-Auth Required
-GET	/health	Check server and model status	❌
-POST	/api/auth/register	Register a new user	❌
-POST	/api/auth/login	Login and get JWT token	❌
-GET	/api/auth/me	Get current user profile	✅
-POST	/api/analyze	Upload & analyze skin image	✅
-GET	/api/history	Get user's past scans	✅
-
-🚧 Future Improvements
- Dockerize the application for seamless deployment.
- Upgrade database to PostgreSQL for production.
- Deploy backend on AWS/Azure and Frontend on Vercel.
- Implement "Google Sign-In" via OAuth2.
- Add Grad-CAM heatmap visualizations to show exactly what the AI is looking at.
-⚕️ Medical Disclaimer
-This AI system is developed strictly for educational and demonstration purposes. It is NOT a certified medical device. The predictions generated by this model should never be used as a definitive medical diagnosis. Always consult a qualified dermatologist or healthcare professional for medical advice and diagnosis.
-
-📜 License
-This project is licensed under the MIT License.
-
-<div align="center">
-Built with ❤️ by <a href="https://github.com/syedasumayya">Syeda Sumayya</a>
-</div>
-```
+📝 Development Notes
+Backend runs on FastAPI with automatic interactive API documentation (/docs).
+Frontend uses Next.js 14 (App Router) with Tailwind CSS for responsive design.
+AI model uses ResNet50 with Transfer Learning.
+Authentication uses standard JSON Web Tokens (JWT) passed via Bearer headers.
+Database uses SQLAlchemy ORM (can be easily swapped to PostgreSQL for production).
+🔗 Additional Resources
+FastAPI Documentation
+Next.js Documentation
+TensorFlow Documentation
